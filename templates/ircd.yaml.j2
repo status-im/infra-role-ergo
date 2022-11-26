@@ -18,6 +18,11 @@ server:
             proxy: false
             # set the minimum TLS version:
             min-tls-version: 1.2
+        ":{{ ergo_cont_wss_port }}":
+            websocket: true
+            tls:
+                cert: /certs/bundle.crt
+                key: /certs/cert.key
 
     # sets the permissions for Unix listen sockets. on a typical Linux system,
     # the default is 0775 or 0755, which prevents other users/groups from connecting

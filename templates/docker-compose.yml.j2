@@ -14,6 +14,7 @@ services:
     ports:
       - '127.0.0.1:{{ ergo_cont_text_port }}:{{ ergo_cont_text_port }}/tcp'
       - '0.0.0.0:{{ ergo_cont_tls_port }}:{{ ergo_cont_tls_port }}/tcp'
+      - '0.0.0.0:{{ ergo_cont_wss_port }}:{{ ergo_cont_wss_port }}/tcp'
     #healthcheck:
     #  test: ["CMD", "wget", "-qO-", "http://127.0.0.1:1234/health"]
     #  interval: 30s

@@ -12,6 +12,7 @@ ergo_cont_tag: 'v2.10.0'
 ergo_cont_image: 'ghcr.io/ergochat/ergo:{{ ergo_cont_tag }}'
 ergo_cont_text_port: 6667
 ergo_cont_tls_port: 6697
+ergo_cont_wss_port: 8097
 
 # Mandatory Config
 #ergo_network_name: 'ExampleNetwork'
