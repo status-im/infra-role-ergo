@@ -13,8 +13,8 @@
 
 - name: Create main config file
   template:
-    src:   'ircd.yaml.j2'
-    dest:  '{{ ergo_cont_conf_vol }}/ircd.yaml'
+    src:   'config.yaml.j2'
+    dest:  '{{ ergo_cont_conf_vol }}/ergo.yaml'
     owner: 'dockremap'
     group: 'docker'
     mode:  0640
