@@ -205,25 +205,6 @@ server:
             #    max-concurrent-connections: 2048
             #    max-connections-per-window: 2048
 
-    # pluggable IP ban mechanism, via subprocess invocation
-    # this can be used to check new connections against a DNSBL, for example
-    # see the manual for details on how to write an IP ban checking script
-    ip-check-script:
-        enabled: false
-        command: "/usr/local/bin/check-ip-ban"
-        # constant list of args to pass to the command; the actual query
-        # and result are transmitted over stdin/stdout:
-        args: []
-        # timeout for process execution, after which we send a SIGTERM:
-        timeout: 9s
-        # how long after the SIGTERM before we follow up with a SIGKILL:
-        kill-timeout: 1s
-        # how many scripts are allowed to run at once? 0 for no limit:
-        max-concurrency: 64
-        # if true, only check anonymous connections (not logged into an account)
-        # at the very end of the handshake:
-        exempt-sasl: false
-
     # IP cloaking hides users' IP addresses from other users and from channel admins
     # (but not from server admins), while still allowing channel admins to ban
     # offending IP addresses or networks. In place of hostnames derived from reverse
@@ -515,7 +496,7 @@ channels:
 
         # restrict new channel registrations to operators only?
         # (operators can then transfer channels to regular users using /CS TRANSFER)
-        operator-only: false
+        operator-only: true
 
         # how many channels can each account register?
         max-channels-per-account: 15
@@ -695,18 +676,6 @@ datastore:
         # this may be necessary to prevent middleware from closing your connections:
         #conn-max-lifetime: 180s
 
-# languages config
-languages:
-    # whether to load languages
-    enabled: false
-
-    # default language to use for new clients
-    # 'en' is the default English language in the code
-    default: "en"
-
-    # which directory contains our language files
-    path: languages
-
 # limits - these need to be the same across the network
 limits:
     # nicklen is the max nick length allowed
@@ -772,23 +741,6 @@ fakelag:
         "MONITOR":     1
         "WHO":         4
 
-# the roleplay commands are semi-standardized extensions to IRC that allow
-# sending and receiving messages from pseudo-nicknames. this can be used either
-# for actual roleplaying, or for bridging IRC with other protocols.
-roleplay:
-    # are roleplay commands enabled at all? (channels and clients still have to
-    # opt in individually with the +E mode)
-    enabled: false
-
-    # require the "roleplay" oper capability to send roleplay messages?
-    require-oper: false
-
-    # require channel operator permissions to send roleplay messages?
-    require-chanops: false
-
-    # add the real nickname, in parentheses, to the end of every roleplay message?
-    add-suffix: true
-
 # history message storage: this is used by CHATHISTORY, HISTORY, znc.in/playback,
 # various autoreplay features, and the resume extension
 history:
@@ -851,22 +803,6 @@ history:
     persistent:
         enabled: false
 
-        # store unregistered channel messages in the persistent database?
-        unregistered-channels: false
-
-        # for a registered channel, the channel owner can potentially customize
-        # the history storage setting. as the server operator, your options are
-        # 'disabled' (no persistent storage, regardless of per-channel setting),
-        # 'opt-in', 'opt-out', and 'mandatory' (force persistent storage, ignoring
-        # per-channel setting):
-        registered-channels: "opt-out"
-
-        # direct messages are only stored in the database for logged-in clients;
-        # you can control how they are stored here (same options as above).
-        # if you enable this, strict nickname reservation is strongly recommended
-        # as well.
-        direct-messages: "opt-out"
-
     # options to control how messages are stored and deleted:
     retention:
         # allow users to delete their own messages from history?
@@ -876,21 +812,6 @@ history:
         # allowing deletion of JSON export of an account's messages. this
         # may be needed for compliance with data privacy regulations.
         enable-account-indexing: false
-
-    # options to control storage of TAGMSG
-    tagmsg-storage:
-        # by default, should TAGMSG be stored?
-        default: false
-
-        # if `default` is false, store TAGMSG containing any of these tags:
-        whitelist:
-            - "+draft/react"
-            - "+react"
-
-        # if `default` is true, don't store TAGMSG containing any of these tags:
-        #blacklist:
-        #    - "+draft/typing"
-        #    - "typing"
 
 # whether to allow customization of the config at runtime using environment variables,
 # e.g., ERGO__SERVER__MAX_SENDQ=128k. see the manual for more details.
