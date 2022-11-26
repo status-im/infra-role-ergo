@@ -1,0 +1,47 @@
+---
+ergo_service_name: 'ergo'
+ergo_service_path: '/docker/{{ ergo_service_name }}'
+ergo_compose_file: '{{ ergo_service_path }}/docker-compose.yml'
+
+# Container
+ergo_cont_name: '{{ ergo_service_name }}'
+ergo_cont_data_vol: '{{ ergo_service_path }}/data'
+ergo_cont_conf_vol: '{{ ergo_service_path }}/conf'
+ergo_cont_certs_vol: '{{ ergo_service_path }}/certs'
+ergo_cont_tag: 'v2.10.0'
+ergo_cont_image: 'ghcr.io/ergochat/ergo:{{ ergo_cont_tag }}'
+ergo_cont_text_port: 6667
+ergo_cont_tls_port: 6697
+
+# Mandatory Config
+#ergo_network_name: 'ExampleNetwork'
+#ergo_server_name: 'irc.example.org'
+
+# Optional Config
+ergo_log_level: 'info' # debug info warn error
+ergo_message_of_the_day: 'Hello World!'
+ergo_registration_enabled: true
+ergo_max_concurrent_conns: 32
+
+# History Config
+ergo_history_enabled: true
+ergo_history_autoresize_window: 7d
+ergo_history_autoreplay_on_join: 100
+
+# Email Verification
+ergo_email_verification_enabled: false
+ergo_email_verification_blacklist_regexes: []
+#ergo_email_verification_sender: 'irc@example.org'
+#ergo_email_verification_mta_host: 'smtp.example.org'
+#ergo_email_verification_mta_port: 25
+#ergo_email_verification_mta_user: 'smtp-user'
+#ergo_email_verification_mta_pass: 'smtp-pass'
+
+# Auth Config
+#ergo_server_password: '$2a$04$...'
+#ergo_admin_password: '$2a$04$...'
+
+# general container management
+compose_recreate: 'smart'
+compose_state: 'present'
+compose_restart: false

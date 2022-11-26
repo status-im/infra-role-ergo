@@ -1,0 +1,16 @@
+---
+- name: Create compose file
+  template:
+    src:   'docker-compose.yml.j2'
+    dest:  '{{ ergo_compose_file }}'
+    owner: 'dockremap'
+    group: 'docker'
+    mode:  0640
+
+- name: Create containers
+  docker_compose:
+    project_src: '{{ ergo_service_path }}'
+    state:       '{{ compose_state }}'
+    restarted:   '{{ ergo_config.changed or compose_restart }}'
+    recreate:    '{{ compose_recreate | default("smart") }}'
+    pull:        true

@@ -1,0 +1,22 @@
+---
+version: '3.7'
+services:
+  node:
+    container_name: '{{ ergo_cont_name }}'
+    image: '{{ ergo_cont_image }}'
+    deploy:
+      restart_policy:
+        condition: 'on-failure'
+    volumes:
+      - '{{ ergo_cont_data_vol }}:/data'
+      - '{{ ergo_cont_conf_vol }}:/conf'
+      - '{{ ergo_cont_certs_vol }}:/certs'
+    ports:
+      - '127.0.0.1:{{ ergo_cont_text_port }}:{{ ergo_cont_text_port }}/tcp'
+      - '0.0.0.0:{{ ergo_cont_tls_port }}:{{ ergo_cont_tls_port }}/tcp'
+    #healthcheck:
+    #  test: ["CMD", "wget", "-qO-", "http://127.0.0.1:1234/health"]
+    #  interval: 30s
+    #  retries: 3
+    entrypoint: '/ircd-bin/ergo'
+    command: 'run --conf=/conf/ircd.yaml'

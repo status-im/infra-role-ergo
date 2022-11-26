@@ -1,0 +1,29 @@
+---
+- name: Create service directories
+  file:
+    path:    '{{ item }}'
+    owner:   'dockremap'
+    group:   'docker'
+    state:   'directory'
+    recurse: true
+  with_items:
+    - '{{ ergo_service_path }}'
+    - '{{ ergo_cont_data_vol }}'
+    - '{{ ergo_cont_conf_vol }}'
+
+- name: Create main config file
+  template:
+    src:   'ircd.yaml.j2'
+    dest:  '{{ ergo_cont_conf_vol }}/ircd.yaml'
+    owner: 'dockremap'
+    group: 'docker'
+    mode:  0640
+  register: ergo_config
+
+- name: Create MOTD file
+  copy:
+    content: '{{ ergo_message_of_the_day }}'
+    dest:    '{{ ergo_cont_conf_vol }}/ergo.motd'
+    owner:   'dockremap'
+    group:   'docker'
+    mode:    0640
