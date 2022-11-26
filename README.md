@@ -25,3 +25,9 @@ Name              Command               State                        Ports
 ------------------------------------------------------------------------------------------------
 ergo   /ircd-bin/ergo run --conf= ...   Up      127.0.0.1:6667->6667/tcp, 0.0.0.0:6697->6697/tcp
 ```
+
+# Administration
+
+For general usage and admin docs see [`USAGE.md`](./USAGE.md).
+
+For more info see [the oficial manual](https://github.com/ergochat/ergo/blob/stable/docs/MANUAL.md).
