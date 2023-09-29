@@ -10,6 +10,10 @@ If registration is not enabled via `accounts.registration.enabled` you can use:
 ```
 /msg nickserv register <password> joe@example.org
 ```
+Password can be changed using:
+```
+/msg nickserv passwd <current> <new_pass> <new_pass_again>
+```
 
 ## Be Always Visible
 
