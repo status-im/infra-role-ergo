@@ -11,5 +11,5 @@
         checks:
           - id:   '{{ ergo_service_name }}-health'
             name: 'Ergo IRC Server Healthcheck'
-            type: tcp
-            http: 'localhost:{{ ergo_cont_text_port }}'
+            type: 'tcp'
+            tcp: 'localhost:{{ ergo_cont_text_port }}'

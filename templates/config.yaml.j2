@@ -10,7 +10,7 @@ server:
 
     # addresses to listen on
     listeners:
-        "127.0.0.1:{{ ergo_cont_text_port }}":
+        "0.0.0.0:{{ ergo_cont_text_port }}":
         "0.0.0.0:{{ ergo_cont_tls_port }}":
             tls:
                 cert: /certs/bundle.crt
