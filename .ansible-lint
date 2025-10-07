@@ -1,0 +1,14 @@
+---
+skip_list:
+  - role-name
+  - name[missing]
+  - yaml[colons]
+  - yaml[comments]
+  - yaml[quoted-strings]
+
+warn_list:
+  - fqcn[action]
+  - fqcn[action-core]
+
+write_list:
+  - none
