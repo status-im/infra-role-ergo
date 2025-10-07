@@ -1,6 +1,7 @@
 ---
 - name: Create Consul service definition
-  include_role: name=consul-service
+  include_role:
+    name: consul-service
   vars:
     consul_config_name: '{{ ergo_service_name }}'
     consul_services:

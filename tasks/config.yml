@@ -17,7 +17,7 @@
     dest:  '{{ ergo_cont_conf_vol }}/ergo.yaml'
     owner: 'dockremap'
     group: 'docker'
-    mode:  0640
+    mode:  '0o640'
   register: ergo_config
 
 - name: Create MOTD file
@@ -26,4 +26,4 @@
     dest:    '{{ ergo_cont_conf_vol }}/ergo.motd'
     owner:   'dockremap'
     group:   'docker'
-    mode:    0640
+    mode:    '0o640'
