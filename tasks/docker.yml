@@ -8,9 +8,16 @@
     mode:  '0o640'
 
 - name: Create containers
-  docker_compose:
+  community.docker.docker_compose_v2:
     project_src: '{{ ergo_service_path }}'
     state:       '{{ compose_state }}'
-    restarted:   '{{ ergo_config.changed or compose_restart }}'
-    recreate:    '{{ compose_recreate | default("smart") }}'
-    pull:        true
+    recreate:    '{{ compose_recreate | default("auto") | replace("smart", "auto") }}'
+    pull:        'always'
+
+- name: Restart containers
+  community.docker.docker_compose_v2:
+    project_src: '{{ ergo_service_path }}'
+    state:       'restarted'
+  when:
+    - compose_state == 'present'
+    - ergo_config.changed or compose_restart | bool
